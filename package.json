@@ -1,6 +1,9 @@
 {
   "name": "passport-js-auth-webhook",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.9.1"
+  },
   "description": "A boilerplate for hasura graphql engine auth webhook with passport js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
