@@ -22,8 +22,6 @@ exports.postLogin = async (req, res, next) => {
     if (err) { return handleResponse(res, 400, {'error': err})}
     if (user) {
       handleResponse(res, 200, user.getUser());
-    } else {
-      handleResponse(res, 401, info);
     }
   })(req, res, next);
 };
@@ -57,11 +55,9 @@ exports.postSignup = async (req, res, next) => {
     return;
   }
   passport.authenticate('local', (err, user, info) => {
-    if (err) { return handleResponse(res, 400, {'error': err})}
+    if (err) {  return handleResponse(res, 400, {'error': err})}
     if (user) {
       handleResponse(res, 200, user.getUser());
-    } else {
-      handleResponse(res, 401, info);
     }
   })(req, res, next);
 };
@@ -72,11 +68,7 @@ exports.getWebhook = async (req, res, next) => {
     if (user) {
       handleResponse(res, 200, user.getWebhookRes());
     } else {
-      if (info.indexOf("invalid_token") === -1) {
-        handleResponse(res, 200, {'X-Hasura-Role': 'anonymous'});
-      } else {
-        handleResponse(res, 401, {'error': info});
-      }
+      handleResponse(res, 200, {'X-Hasura-Role': 'anonymous'});
     }
   })(req, res, next);
 }

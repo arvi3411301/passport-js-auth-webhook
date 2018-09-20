@@ -15,10 +15,10 @@ passport.use(
       .where('username', username)
       .first()
       .then(function (user) {
-        if (!user) { return done(null, false, { error: 'Unknown user' }); }
+        if (!user) { return done('Unknown user'); }
         user.verifyPassword(password, function (err, passwordCorrect) {
           if (err) { return done(err); }
-          if (!passwordCorrect) { return done(null, false, { error: 'Invalid password' }); }
+          if (!passwordCorrect) { return done('Invalid password'); }
           return done(null, user)
         })
       }).catch(function (err) {
@@ -34,7 +34,7 @@ passport.use(new BearerStrategy(
       .where('token', token)
       .first()
       .then(function (user){
-        if (!user) { return done(null, false); }
+        if (!user) { return done('Invalid Token'); }
         return done(null, user);
       }).catch(function (err) {
         done(err);
