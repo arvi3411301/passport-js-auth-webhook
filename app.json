@@ -1,0 +1,29 @@
+{
+  "name": "Hasura GraphQL Engine Auth Webhook",
+  "description": "Hasura GraphQL Engine Auth Webhook <> heroku",
+  "logo": "https://storage.googleapis.com/hasura-graphql-engine/console/assets/favicon.png",
+  "keywords": [
+    "graphql",
+    "heroku",
+    "postgres",
+    "hasura",
+    "auth",
+    "webhook"
+  ],
+  "website": "https://hasura.io",
+  "repository": "https://github.com/arvi3411301/passport-js-auth-webhook",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "scripts": {
+    "postdeploy": "knex migrate:latest"
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    }
+  ]
+}
