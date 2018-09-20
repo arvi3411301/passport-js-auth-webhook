@@ -1,5 +1,5 @@
 {
-  "name": "Hasura GraphQL Engine Auth Webhook",
+  "name": "HGE Auth Webhook",
   "description": "Hasura GraphQL Engine Auth Webhook <> heroku",
   "logo": "https://storage.googleapis.com/hasura-graphql-engine/console/assets/favicon.png",
   "keywords": [
