@@ -5,12 +5,11 @@ const bcrypt = require('bcrypt');
 
 /**
  * POST /login
- * Sign in using email and password.
+ * Sign in using username and password.
  */
 exports.postLogin = async (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('username', 'Username is not valid').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
 
@@ -32,10 +31,9 @@ exports.postLogin = async (req, res, next) => {
  * Create a new local account.
  */
 exports.postSignup = async (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('username', 'Username is not valid').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-  req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
 
@@ -47,7 +45,7 @@ exports.postSignup = async (req, res, next) => {
     const user = await User.query()
                            .allowInsert('[username, password]')
                            .insert({
-                             username: req.body.email,
+                             username: req.body.username,
                              password: req.body.password
                            });
   } catch (err) {
@@ -66,7 +64,10 @@ exports.getWebhook = async (req, res, next) => {
   passport.authenticate('bearer', (err, user, info) => {
     if (err) { return handleResponse(res, 401, {'error': err}); }
     if (user) {
-      handleResponse(res, 200, user.getWebhookRes());
+      handleResponse(res, 200, {
+        'X-Hasura-Role': 'user',
+        'X-Hasura-User-Id': `${user.id}`
+      });
     } else {
       handleResponse(res, 200, {'X-Hasura-Role': 'anonymous'});
     }

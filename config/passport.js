@@ -6,7 +6,7 @@ const { errorHandler } = require('../db/errors');
 
 passport.use(
   new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
   function (username, password, done) {

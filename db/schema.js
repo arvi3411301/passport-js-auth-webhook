@@ -27,13 +27,6 @@ class User extends Model {
     }
   }
 
-  getWebhookRes() {
-    return {
-      'X-Hasura-Role': 'user',
-      'X-Hasura-User-Id': `${this.id}`
-    }
-  }
-
   async $beforeInsert () {
     const salt = bcrypt.genSaltSync();
     this.password = await bcrypt.hash(this.password, salt)
