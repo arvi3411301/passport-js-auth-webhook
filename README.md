@@ -12,7 +12,7 @@ This is a sample auth webhook for authenticating requests to the Hasura GraphQL 
   ```
      curl --header "Content-Type: application/json" \
       --request POST \
-      --data '{"email": "test@hasura.io", "password": "test123", "confirmPassword": "test123"}' \
+      --data '{"username": "test123", "password": "test123", "confirmPassword": "test123"}' \
       http://localhost:8080/signup
   ```
 
@@ -29,7 +29,7 @@ This is a sample auth webhook for authenticating requests to the Hasura GraphQL 
   ```
      curl --header "Content-Type: application/json" \
       --request POST \
-      --data '{"email": "test@hasura.io", "password": "test123"}' \
+      --data '{"username": "test123", "password": "test123"}' \
       http://localhost:8080/login
   ```
 
