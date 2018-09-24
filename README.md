@@ -2,6 +2,37 @@
 
 This is a sample auth webhook for authenticating requests to the Hasura GraphQL engine.
 
+Prerequisites
+-------------
+
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Node.js 8.9+](http://nodejs.org)
+
+Getting Started
+---------------
+
+The easiest way to get started is to clone the repository:
+
+```bash
+# Get the latest snapshot
+git clone git@github.com:arvi3411301/passport-js-auth-webhook.git myproject
+
+# Change directory
+cd myproject
+
+# Install NPM dependencies
+npm install
+
+# Set DATABASE_URL env
+export DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<database_name>
+
+# Apply migrations
+knex migrate:latest
+
+# Then simply start your app
+npm start
+```
+
 ### Deploy with Heroku (recommended)
 
 1. Click the following button for deploying to Heroku.
