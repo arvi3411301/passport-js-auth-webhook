@@ -1,4 +1,4 @@
-# Sample Passport.js Auth Webhook for Hasura GraphQL engine
+# Passport.js Auth Webhook example for Hasura GraphQL engine
 
 This is a sample auth webhook for authenticating requests to the Hasura GraphQL engine.
 
@@ -15,10 +15,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone git@github.com:arvi3411301/passport-js-auth-webhook.git myproject
+git clone git@github.com:hasura/graphql-engine.git myproject
 
 # Change directory
-cd myproject
+cd myproject/community/boilerplates/auth-webhooks/passport-js-auth-webhook
 
 # Install NPM dependencies
 npm install
@@ -35,9 +35,20 @@ npm start
 
 ### Deploy with Heroku (recommended)
 
-1. Click the following button for deploying to Heroku.
-
-   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/arvi3411301/passport-js-auth-webhook)
+1. Follow the below steps to deploy with heroku:
+   ```bash
+   # Create heroku app
+   heroku create <app-name>
+   
+   # Create PostgreSQL addon
+   heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
+   
+   # Push changes to heroku
+   git push heroku master
+   
+   # Run Apply migrations
+   heroku run knex migrate:latest
+   ```
 
 2. Once it is deployed, we can create an user using `/signup` API like below:
   ```
